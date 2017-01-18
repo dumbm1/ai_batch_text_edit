@@ -12,10 +12,18 @@
     themeManager.init();
     loadJSX("json2.js");
 
-    $("#btn_send").click(function() {
+    if (csInterface.isWindowVisible()) {
       csInterface.evalScript('main()', function(result) {
-         alert(result);
-        csInterface.closeExtension();
+        $("#txt_fld").val(result);
+      });
+    }
+
+    $("#btn_send").click(function() {
+      // var et = $("#txt_fld").val();
+      var et = document.getElementById('txt_fld').value;
+      csInterface.evalScript('repl("' + et + '")', function(result) {
+        alert(result);
+        // csInterface.closeExtension();
       });
     });
 

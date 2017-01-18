@@ -1,8 +1,6 @@
 /*Your styles*/
 
-body {
-    margin: 20px;
-}
+
 
 #content {
     margin-right: auto;
@@ -44,12 +42,3 @@ by the settings of the CC application
 .hostElt {
 }
 
-.hostButton {
-    border: 1px solid;
-    border-radius: 2px;
-    height: 20px;
-    vertical-align: bottom;
-    font-family: inherit;
-    color: inherit;
-    font-size: inherit;
-}
