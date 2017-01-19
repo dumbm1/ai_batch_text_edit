@@ -149,7 +149,7 @@ function repl(et) {
 
   replaceContents(
     tfs,
-    et.split("\r"),
+    et.split("\n"),
     new RegExp(RETURN_CODE_ALT_FOR_REX, "g")
   );
 

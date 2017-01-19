@@ -21,7 +21,7 @@
     $("#btn_send").click(function() {
       // var et = $("#txt_fld").val();
       var et = document.getElementById('txt_fld').value;
-      csInterface.evalScript('repl("' + et + '")', function(result) {
+      csInterface.evalScript('repl(' + JSON.stringify(et) + ')', function(result) {
         alert(result);
         // csInterface.closeExtension();
       });
