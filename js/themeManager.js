@@ -63,41 +63,66 @@ var themeManager = (function() {
   /**
    * Update the theme with the AppSkinInfo retrieved from the host product.
    */
-  function updateThemeWithAppSkinInfo(appSkinInfo) {
+  function updateThemeWithAppSkinInfo ( appSkinInfo ) {
+    var focusBorderColor;
 
     var panelBgColor = appSkinInfo.panelBackgroundColor.color;
-    var bgdColor     = toHex(panelBgColor);
+    var bgdColor = toHex ( panelBgColor );
 
-    var darkBgdColor = toHex(panelBgColor, 20);
+    var darkBgdColor = toHex ( panelBgColor, 20 );
+    var darkBgdColorFoFields = toHex ( panelBgColor, 100 );
 
     var fontColor = "F0F0F0";
-    if (panelBgColor.red > 122) {
+    if ( panelBgColor.red > 122 ) {
       fontColor = "000000";
     }
-    var lightBgdColor = toHex(panelBgColor, -100);
+    // @MaratShagiev 3-09-15:
+    if ( panelBgColor.red > 122 ) {
+      focusBorderColor = '0000CC';
+    } else {
+      focusBorderColor = 'FF6600';
+    }
+
+    var lightBgdColor = toHex ( panelBgColor, -100 );
 
     var styleId = "hostStyle";
 
-    addRule(styleId, ".hostElt", "background-color:" + "#" + bgdColor);
-    addRule(styleId, ".hostElt", "font-size:" + appSkinInfo.baseFontSize + "px;");
-    addRule(styleId, ".hostElt", "font-family:" + appSkinInfo.baseFontFamily);
-    addRule(styleId, ".hostElt", "color:" + "#" + fontColor);
+    addRule ( styleId, ".hostElt", "background-color:" + "#" + bgdColor );
+    addRule ( styleId, ".hostElt", "font-size:" + appSkinInfo.baseFontSize + "px;" );
+    addRule ( styleId, ".hostElt", "font-family:" + appSkinInfo.baseFontFamily );
+    addRule ( styleId, ".hostElt", "color:" + "#" + fontColor );
 
-    addRule(styleId, ".hostBgd", "background-color:" + "#" + bgdColor);
-    addRule(styleId, ".hostBgdDark", "background-color: " + "#" + darkBgdColor);
-    addRule(styleId, ".hostBgdLight", "background-color: " + "#" + lightBgdColor);
-    addRule(styleId, ".hostFontSize", "font-size:" + appSkinInfo.baseFontSize + "px;");
-    addRule(styleId, ".hostFontFamily", "font-family:" + appSkinInfo.baseFontFamily);
-    addRule(styleId, ".hostFontColor", "color:" + "#" + fontColor);
+    addRule ( styleId, ".hostBgd", "background-color:" + "#" + bgdColor );
+    addRule ( styleId, ".hostBgdDark", "background-color: " + "#" + darkBgdColor );
+    addRule ( styleId, ".hostBgdLight", "background-color: " + "#" + lightBgdColor );
+    addRule ( styleId, ".hostFontSize", "font-size:" + appSkinInfo.baseFontSize + "px;" );
+    addRule ( styleId, ".hostFontFamily", "font-family:" + appSkinInfo.baseFontFamily );
+    addRule ( styleId, ".hostFontColor", "color:" + "#" + fontColor );
 
-    addRule(styleId, ".hostFont", "font-size:" + appSkinInfo.baseFontSize + "px;");
-    addRule(styleId, ".hostFont", "font-family:" + appSkinInfo.baseFontFamily);
-    addRule(styleId, ".hostFont", "color:" + "#" + fontColor);
+    addRule ( styleId, ".hostFont", "font-size:" + appSkinInfo.baseFontSize + "px;" );
+    addRule ( styleId, ".hostFont", "font-family:" + appSkinInfo.baseFontFamily );
+    addRule ( styleId, ".hostFont", "color:" + "#" + fontColor );
 
-    addRule(styleId, ".hostButton", "background-color:" + "#" + darkBgdColor);
-    addRule(styleId, ".hostButton:hover", "background-color:" + "#" + bgdColor);
-    addRule(styleId, ".hostButton:active", "background-color:" + "#" + darkBgdColor);
-    addRule(styleId, ".hostButton", "border-color: " + "#" + lightBgdColor);
+    addRule ( styleId, ".hostButton", "background-color:" + "#" + darkBgdColor );
+    addRule ( styleId, ".hostButton:hover", "background-color:" + "#" + bgdColor );
+    addRule ( styleId, ".hostButton:active", "background-color:" + "#" + darkBgdColor );
+    addRule ( styleId, ".hostButton", "border-color: " + "#" + lightBgdColor );
+    // @MaratShagiev 3-09-15:
+    addRule ( styleId, ".hostTextarea", "background-color:" + "#" + darkBgdColorFoFields );
+    addRule ( styleId, ".hostTextarea:focus", "border-color:" + "#" + focusBorderColor );
+    //    addRule ( styleId, ".hostTextarea:hover", "background-color:" + "#" + bgdColor);
+    addRule ( styleId, ".hostTextarea:hover", "border-color:" + "#" + focusBorderColor );
+    addRule ( styleId, ".hostTextarea:active", "background-color:" + "#" + darkBgdColorFoFields );
+    addRule ( styleId, ".hostTextarea", "border-color: " + "#" + lightBgdColor );
+    addRule ( styleId, ".hostTextarea", "font-size:" + appSkinInfo.baseFontSize + "px;" );
+    addRule ( styleId, ".hostTextarea", "font-family:" + appSkinInfo.baseFontFamily );
+    //    addRule ( styleId, ".hostTextarea", "color:" + "#" + fontColor );
+
+    addRule ( styleId, ".hostTitle", "background-color:" + "#" + bgdColor );
+    addRule ( styleId, ".hostTitle:hover", "background-color:" + "#" + darkBgdColor );
+    addRule ( styleId, ".hostTitle:active", "background-color:" + "#" + darkBgdColorFoFields );
+
+    addRule( styleId, ".hostBody", "background-color:" + "#" + darkBgdColor);
 
   }
 

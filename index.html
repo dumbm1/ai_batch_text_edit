@@ -7,6 +7,9 @@
 
   <title></title>
   <style type="text/css">
+    #content{
+      font-size: 1.1em
+    }
 
     .hostButton {
       border:         1px solid;
@@ -25,10 +28,11 @@
       bottom:         0;
       left:           0;
       margin:         5px;
-      font-size:      14px;
+      font-size:      12pt;
       text-transform: none;
-      margin-bottom:  30px;
+      margin-bottom:  50px;
       width:          435px;
+      resize:         none;
     }
 
     #btn_div {
@@ -37,8 +41,29 @@
       margin-left: 5px;
     }
 
-    textarea {
-      resize: none;
+    label {
+      margin-left: 5px;
+    }
+
+    input[type=number] {
+      width:       50px;
+      margin:      0;
+      padding:     0;
+      height:      16px;
+      text-align:  center;
+      font-weight: bold;
+      font-size:   1.1em;
+    }
+
+    input[type=checkbox] {
+      opacity:  1;
+      display:  inline-block;
+      position: relative;
+      margin:   3px 0 0 -1px;
+    }
+
+    p {
+      margin-bottom: 5px;
     }
 
   </style>
@@ -49,9 +74,17 @@
 <div id="content">
   <textarea class="hostTextarea" id="txt_fld" autofocus spellcheck="false"></textarea>
 
+
   <div id="btn_div">
-    <input type="button" id="btn_replace" class="hostButton" value="Replace">
-    <input type="button" id="btn_refresh" class="hostButton" value="Refresh"/>
+    <p>*@/ means a return code</p>
+    <input type="button" class="hostButton" id="btn_replace" value="Replace">
+    <input type="button" class="hostButton" id="btn_refresh" value="Refresh"/>
+    <label>font size:</label>
+    <input type="number" id="font_size" class="hostTextarea" step="1" max="36" min="6" value="12">
+    <label>close after replace:</label>
+    <input type="checkbox" id="chk_close">
+    <label>save:</label>
+    <input type="checkbox" id="chk_save">
   </div>
 
 </div>

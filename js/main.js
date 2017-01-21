@@ -21,6 +21,10 @@
       });
     }
 
+    $("#font_size").change(function(){
+      $('#txt_fld').css("font-size", $(this).val() + "pt");
+    })
+
     $("#btn_replace").click(function() {
       var et = $("#txt_fld").val();
       csInterface.evalScript('replaceAll(' + JSON.stringify(et) + ')', function(result) {

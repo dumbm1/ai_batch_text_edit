@@ -1,43 +1,61 @@
 // return code alternative character(s) used while editting
 var RETURN_CODE_ALT = "@/";
-
 // return code that used in regexp (escape the characters if it needs)
 var RETURN_CODE_ALT_FOR_REX = RETURN_CODE_ALT;
 
-// get textframes in the selection
-var tfs = []; // textframes
-_extractTextFramesAsVTextFrameItem(app.activeDocument.selection, tfs);
-
-// sort tfs
-_sortVTextFramesReasonableByPosition(tfs);
-
-// get the contents of tfs
-var conts           = [];
-var rex_return_code = new RegExp("\r", "g");
-for (var i = 0; i < tfs.length; i++) {
-  conts.push(tfs[i].tf.contents.replace(
-    rex_return_code, RETURN_CODE_ALT));
-}
-
 function getContents() {
   try {
-    _checkPrecond(tfs);
+    _checkDoc();
   } catch (e) {
     return e;
+  }
+  // get textframes in the selection
+  var tfs = []; // textframes
+  _extractTextFramesAsVTextFrameItem(app.activeDocument.selection, tfs);
+  try {
+    _checkTextFrames(tfs);
+  } catch (e) {
+    return e;
+  }
+  // sort tfs
+  _sortVTextFramesReasonableByPosition(tfs);
+  // get the contents of tfs
+  var conts           = [];
+  var rex_return_code = new RegExp("\r", "g");
+  for (var i = 0; i < tfs.length; i++) {
+    conts.push(tfs[i].tf.contents.replace(
+      rex_return_code, RETURN_CODE_ALT));
   }
   return conts.join("\n");
 }
 
 function replaceAll(et) {
   try {
-    _checkPrecond(tfs);
+    _checkDoc();
   } catch (e) {
     return e;
+  }
+  // get textframes in the selection
+  var tfs = []; // textframes
+  _extractTextFramesAsVTextFrameItem(app.activeDocument.selection, tfs);
+  try {
+    _checkTextFrames(tfs);
+  } catch (e) {
+    return e;
+  }
+  // sort tfs
+  _sortVTextFramesReasonableByPosition(tfs);
+  // get the contents of tfs
+  var conts           = [];
+  var rex_return_code = new RegExp("\r", "g");
+  for (var i = 0; i < tfs.length; i++) {
+    conts.push(tfs[i].tf.contents.replace(
+      rex_return_code, RETURN_CODE_ALT));
   }
   _replaceContents(tfs, et.split("\n"), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
 }
 
-function _checkPrecond() {
+function _checkDoc() {
   var errMsg,
       errCode;
 
@@ -50,7 +68,16 @@ function _checkPrecond() {
     alert(errMsg);
     throw new Error(errCode);
   }
-  if (!__isSelTxtFrames(tfs)) {
+  return true;
+  function __isDoc() {
+    return documents.length;
+  }
+}
+
+function _checkTextFrames(tfs) {
+  var errMsg,
+      errCode;
+  if (!__isTxtFrames(tfs)) {
     errCode = '0xabcdef';
     errMsg  = 'Error:\n' +
       'Expected selected text frame[s]\n' +
@@ -60,13 +87,8 @@ function _checkPrecond() {
     throw new Error(errCode);
   }
   return true;
-
-  function __isDoc() {
-    return !(documents.length < 1);
-  }
-
-  function __isSelTxtFrames(tfs /*@param {Array} tfs - selected text frames*/) {
-    return !(tfs.length < 1);
+  function __isTxtFrames(tfs /*@param {Array} tfs - selected text frames*/) {
+    return tfs.length;
   }
 }
 
