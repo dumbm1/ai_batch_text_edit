@@ -1,238 +1,150 @@
-// main();
-function main() {
-  // - settings -------------
-  // return code alternative character(s) used while editting
-  var RETURN_CODE_ALT = "@/";
+// return code alternative character(s) used while editting
+var RETURN_CODE_ALT = "@/";
 
-  // return code that used in regexp (escape the characters if it needs)
-  var RETURN_CODE_ALT_FOR_REX = RETURN_CODE_ALT;
+// return code that used in regexp (escape the characters if it needs)
+var RETURN_CODE_ALT_FOR_REX = RETURN_CODE_ALT;
 
-  // - settings end -------------
-  // ----------------------------
-  if (app.documents.length < 1) return;
+// get textframes in the selection
+var tfs = []; // textframes
+_extractTextFramesAsVTextFrameItem(app.activeDocument.selection, tfs);
 
-  // get textframes in the selection
-  var tfs = []; // textframes
-  extractTextFramesAsVTextFrameItem(app.activeDocument.selection, tfs);
-  if (tfs.length < 1) {
-    alert("Please select textframes");
-    return;
+// sort tfs
+_sortVTextFramesReasonableByPosition(tfs);
+
+// get the contents of tfs
+var conts           = [];
+var rex_return_code = new RegExp("\r", "g");
+for (var i = 0; i < tfs.length; i++) {
+  conts.push(tfs[i].tf.contents.replace(
+    rex_return_code, RETURN_CODE_ALT));
+}
+
+function getContents() {
+  try {
+    _checkPrecond(tfs);
+  } catch (e) {
+    return e;
   }
-
-  // sort tfs
-  sortVTextFramesReasonableByPosition(tfs);
-
-  // get the contents of tfs
-  var conts           = [];
-  var rex_return_code = new RegExp("\r", "g");
-  for (var i = 0; i < tfs.length; i++) {
-    conts.push(tfs[i].tf.contents.replace(
-      rex_return_code, RETURN_CODE_ALT));
-  }
-
   return conts.join("\n");
+}
 
-  // --------------------------------------------------
-  function vTextFrameItem(tf) {
-    // virtual textframe for comparing the each position
-    this.tf = tf;
-    if (tf.kind == TextType.POINTTEXT) {
-      this.left = tf.left;
-      this.top  = tf.top;
-    } else {
-      var tp    = tf.textPath;
-      this.left = tp.left;
-      this.top  = tp.top;
-    }
+function replaceAll(et) {
+  try {
+    _checkPrecond(tfs);
+  } catch (e) {
+    return e;
+  }
+  _replaceContents(tfs, et.split("\n"), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
+}
+
+function _checkPrecond() {
+  var errMsg,
+      errCode;
+
+  if (!__isDoc()) {
+    errCode = '0xfedcba';
+    errMsg  = 'Error:\n' +
+      'Expected document and selected text frame[s]\n' +
+      'Close this window and try again\n' +
+      'with document and selected text frame[s]';
+    alert(errMsg);
+    throw new Error(errCode);
+  }
+  if (!__isSelTxtFrames(tfs)) {
+    errCode = '0xabcdef';
+    errMsg  = 'Error:\n' +
+      'Expected selected text frame[s]\n' +
+      'Close this window and try again\n' +
+      'with a selected text frame[s]';
+    alert(errMsg);
+    throw new Error(errCode);
+  }
+  return true;
+
+  function __isDoc() {
+    return !(documents.length < 1);
   }
 
-  // --------------------------------------------------
-  function replaceContents(tfs, et_texts, rex_return_code_alt) {
-    while (et_texts[et_texts.length - 1] == "") et_texts.pop();
-
-    for (var i = 0; i < tfs.length; i++) {
-      if (i >= et_texts.length) break;
-
-      tfs[i].tf.contents
-        = et_texts[i].replace(rex_return_code_alt, "\r");
-    }
+  function __isSelTxtFrames(tfs /*@param {Array} tfs - selected text frames*/) {
+    return !(tfs.length < 1);
   }
+}
 
-  // --------------------------------------------------
-  function sortVTextFramesReasonableByPosition(tfs) {
-    var rect = [];
-    // reft, top, right, bottom
-    getVTextFramesRect(tfs, rect);
+function _replaceContents(tfs, et_texts, rex_return_code_alt) {
+  while (et_texts[et_texts.length - 1] == "") et_texts.pop();
 
-    if (rect[1] - rect[3] < rect[2] - rect[0]) { // height < width
-      // left -> right || top -> bottom
-      tfs.sort(function(a, b) {
-        return a.left == b.left
-          ? b.top - a.top
-          : a.left - b.left
-      });
-    } else {
-      // top -> down || left -> right
-      tfs.sort(function(a, b) {
-        return a.top == b.top
-          ? a.left - b.left
-          : b.top - a.top
-      });
-    }
+  for (var i = 0; i < tfs.length; i++) {
+    if (i >= et_texts.length) break;
+
+    tfs[i].tf.contents = et_texts[i].replace(rex_return_code_alt, "\r");
   }
+}
 
-  // --------------------------------------------------
-  function getVTextFramesRect(tfs, rect) {
-    // get the rect that includes each top-left corner of tfs
-    var top, left;
-    for (var i = 0; i < tfs.length; i++) {
-      top  = tfs[i].top;
-      left = tfs[i].left;
-      if (i == 0) {
-        // reft, top, right, bottom
-        rect.push(left);
-        rect.push(top);
-        rect.push(left);
-        rect.push(top);
-      } else {
-        rect[0] = Math.min(rect[0], left);
-        rect[1] = Math.max(rect[1], top);
-        rect[2] = Math.max(rect[2], left);
-        rect[3] = Math.min(rect[3], top);
-      }
-    }
-  }
-
-  // --------------------------------------------------
-  function extractTextFramesAsVTextFrameItem(s, r) {
-    // s is an array of pageitems ( ex. selection )
-    for (var i = 0; i < s.length; i++) {
-      if (s[i].typename == "TextFrame") {
-        r.push(new vTextFrameItem(s[i]));
-      } else if (s[i].typename == "GroupItem") {
-        extractTextFramesAsVTextFrameItem(s[i].pageItems, r);
-      }
+function _extractTextFramesAsVTextFrameItem(s, r) {
+  // s is an array of pageitems ( ex. selection )
+  for (var i = 0; i < s.length; i++) {
+    if (s[i].typename == "TextFrame") {
+      r.push(new _vTextFrameItem(s[i]));
+    } else if (s[i].typename == "GroupItem") {
+      _extractTextFramesAsVTextFrameItem(s[i].pageItems, r);
     }
   }
 }
 
-function repl(et) {
-  // - settings -------------
-  // return code alternative character(s) used while editting
-  var RETURN_CODE_ALT = "@/";
+function _sortVTextFramesReasonableByPosition(tfs) {
+  var rect = [];
+  // reft, top, right, bottom
+  _getVTextFramesRect(tfs, rect);
 
-  // return code that used in regexp (escape the characters if it needs)
-  var RETURN_CODE_ALT_FOR_REX = RETURN_CODE_ALT;
-
-  // - settings end -------------
-  // ----------------------------
-  if (app.documents.length < 1) return;
-
-  // get textframes in the selection
-  var tfs = []; // textframes
-  extractTextFramesAsVTextFrameItem(app.activeDocument.selection, tfs);
-  if (tfs.length < 1) {
-    alert("Please select textframes");
-    return;
+  if (rect[1] - rect[3] < rect[2] - rect[0]) { // height < width
+    // left -> right || top -> bottom
+    tfs.sort(function(a, b) {
+      return a.left == b.left
+        ? b.top - a.top
+        : a.left - b.left
+    });
+  } else {
+    // top -> down || left -> right
+    tfs.sort(function(a, b) {
+      return a.top == b.top
+        ? a.left - b.left
+        : b.top - a.top
+    });
   }
+}
 
-  // sort tfs
-  sortVTextFramesReasonableByPosition(tfs);
+function _vTextFrameItem(tf) {
+  // virtual textframe for comparing the each position
+  this.tf = tf;
+  if (tf.kind == TextType.POINTTEXT) {
+    this.left = tf.left;
+    this.top  = tf.top;
+  } else {
+    var tp    = tf.textPath;
+    this.left = tp.left;
+    this.top  = tp.top;
+  }
+}
 
-  // get the contents of tfs
-  var conts           = [];
-  var rex_return_code = new RegExp("\r", "g");
+function _getVTextFramesRect(tfs, rect) {
+  // get the rect that includes each top-left corner of tfs
+  var top, left;
+
   for (var i = 0; i < tfs.length; i++) {
-    conts.push(tfs[i].tf.contents.replace(
-      rex_return_code, RETURN_CODE_ALT));
-  }
+    top  = tfs[i].top;
+    left = tfs[i].left;
 
-  replaceContents(
-    tfs,
-    et.split("\n"),
-    new RegExp(RETURN_CODE_ALT_FOR_REX, "g")
-  );
-
-  function replaceContents(tfs, et_texts, rex_return_code_alt) {
-    while (et_texts[et_texts.length - 1] == "") et_texts.pop();
-
-    for (var i = 0; i < tfs.length; i++) {
-      if (i >= et_texts.length) break;
-
-      tfs[i].tf.contents = et_texts[i].replace(rex_return_code_alt, "\r");
-    }
-  }
-
-  // --------------------------------------------------
-  function extractTextFramesAsVTextFrameItem(s, r) {
-    // s is an array of pageitems ( ex. selection )
-    for (var i = 0; i < s.length; i++) {
-      if (s[i].typename == "TextFrame") {
-        r.push(new vTextFrameItem(s[i]));
-      } else if (s[i].typename == "GroupItem") {
-        extractTextFramesAsVTextFrameItem(s[i].pageItems, r);
-      }
-    }
-  }
-
-  // --------------------------------------------------
-  function sortVTextFramesReasonableByPosition(tfs) {
-    var rect = [];
-    // reft, top, right, bottom
-    getVTextFramesRect(tfs, rect);
-
-    if (rect[1] - rect[3] < rect[2] - rect[0]) { // height < width
-      // left -> right || top -> bottom
-      tfs.sort(function(a, b) {
-        return a.left == b.left
-          ? b.top - a.top
-          : a.left - b.left
-      });
+    if (i == 0) {
+      // reft, top, right, bottom
+      rect.push(left);
+      rect.push(top);
+      rect.push(left);
+      rect.push(top);
     } else {
-      // top -> down || left -> right
-      tfs.sort(function(a, b) {
-        return a.top == b.top
-          ? a.left - b.left
-          : b.top - a.top
-      });
-    }
-  }
-
-  // --------------------------------------------------
-  function vTextFrameItem(tf) {
-    // virtual textframe for comparing the each position
-    this.tf = tf;
-    if (tf.kind == TextType.POINTTEXT) {
-      this.left = tf.left;
-      this.top  = tf.top;
-    } else {
-      var tp    = tf.textPath;
-      this.left = tp.left;
-      this.top  = tp.top;
-    }
-  }
-
-  // --------------------------------------------------
-  function getVTextFramesRect(tfs, rect) {
-    // get the rect that includes each top-left corner of tfs
-    var top, left;
-
-    for (var i = 0; i < tfs.length; i++) {
-      top  = tfs[i].top;
-      left = tfs[i].left;
-
-      if (i == 0) {
-        // reft, top, right, bottom
-        rect.push(left);
-        rect.push(top);
-        rect.push(left);
-        rect.push(top);
-      } else {
-        rect[0] = Math.min(rect[0], left);
-        rect[1] = Math.max(rect[1], top);
-        rect[2] = Math.max(rect[2], left);
-        rect[3] = Math.min(rect[3], top);
-      }
+      rect[0] = Math.min(rect[0], left);
+      rect[1] = Math.max(rect[1], top);
+      rect[2] = Math.max(rect[2], left);
+      rect[3] = Math.min(rect[3], top);
     }
   }
 }

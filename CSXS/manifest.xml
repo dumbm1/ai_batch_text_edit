@@ -30,7 +30,7 @@
         </Lifecycle>
         <UI>
           <Type>ModalDialog</Type>
-          <Menu>Batch Text Edit</Menu>
+          <Menu>Batch Text Edit (rearrange host and some minor changes)</Menu>
           <Geometry>
             <Size>
               <Height>300</Height>

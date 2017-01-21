@@ -17,6 +17,7 @@
       color:          inherit;
       font-size:      inherit;
     }
+
     #txt_fld {
       position:       absolute;
       top:            0;
@@ -26,12 +27,18 @@
       margin:         5px;
       font-size:      14px;
       text-transform: none;
-      margin-bottom: 30px;
-      width:435px;
+      margin-bottom:  30px;
+      width:          435px;
     }
+
     #btn_div {
-      position: absolute;
-      bottom:   5px;
+      position:    absolute;
+      bottom:      5px;
+      margin-left: 5px;
+    }
+
+    textarea {
+      resize: none;
     }
 
   </style>
@@ -40,10 +47,10 @@
 <body class="hostElt">
 
 <div id="content">
-  <textarea class="hostTextarea" id="txt_fld" autofocus></textarea>
+  <textarea class="hostTextarea" id="txt_fld" autofocus spellcheck="false"></textarea>
 
   <div id="btn_div">
-    <input type="button" id="btn_send" class="hostButton" value="Run Script">
+    <input type="button" id="btn_replace" class="hostButton" value="Replace">
     <input type="button" id="btn_refresh" class="hostButton" value="Refresh"/>
   </div>
 

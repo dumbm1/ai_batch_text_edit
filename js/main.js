@@ -12,18 +12,21 @@
     themeManager.init();
     loadJSX("json2.js");
 
+    var closeExt = false; // close after push ok button
+
     if (csInterface.isWindowVisible()) {
-      csInterface.evalScript('main()', function(result) {
+      csInterface.evalScript('getContents()', function(result) {
+        if (result.match('0xabcdef') || result.match('0xfedcba')) csInterface.closeExtension();
         $("#txt_fld").val(result);
       });
     }
 
-    $("#btn_send").click(function() {
-      // var et = $("#txt_fld").val();
-      var et = document.getElementById('txt_fld').value;
-      csInterface.evalScript('repl(' + JSON.stringify(et) + ')', function(result) {
-        alert(result);
-        // csInterface.closeExtension();
+    $("#btn_replace").click(function() {
+      var et = $("#txt_fld").val();
+      csInterface.evalScript('replaceAll(' + JSON.stringify(et) + ')', function(result) {
+        if (closeExt) {
+          csInterface.closeExtension();
+        }
       });
     });
 
