@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest Version="4.0"
                    ExtensionBundleId="com.ai.batchTextEdit"
-                   ExtensionBundleVersion="0.0.2"
+                   ExtensionBundleVersion="0.0.3"
                    ExtensionBundleName="batchTextEdit"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ExtensionList>
-    <Extension Id="com.ai.batchTextEdit.dialog" Version="0.0.2"/>
+    <Extension Id="com.ai.batchTextEdit.dialog" Version="0.0.3"/>
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
@@ -30,7 +30,7 @@
         </Lifecycle>
         <UI>
           <Type>Modeless</Type>
-          <Menu>Batch Text Edit v0.0.2 (change font size)</Menu>
+          <Menu>Batch Text Edit v0.0.3 (save opts)</Menu>
           <Geometry>
             <Size>
               <Height>300</Height>
