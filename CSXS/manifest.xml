@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest Version="4.0"
-                   ExtensionBundleId="com.ai.batchTextEdit"
-                   ExtensionBundleVersion="0.0.3"
-                   ExtensionBundleName="batchTextEdit"
+                   ExtensionBundleId="com.ai.batchTextEdit_wk"
+                   ExtensionBundleVersion="0.4"
+                   ExtensionBundleName="batchTextEdit_wk"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ExtensionList>
-    <Extension Id="com.ai.batchTextEdit.dialog" Version="0.0.3"/>
+    <Extension Id="com.ai.batchTextEdit_wk.dialog" Version="0.4"/>
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
@@ -19,7 +19,7 @@
     </RequiredRuntimeList>
   </ExecutionEnvironment>
   <DispatchInfoList>
-    <Extension Id="com.ai.batchTextEdit.dialog">
+    <Extension Id="com.ai.batchTextEdit_wk.dialog">
       <DispatchInfo>
         <Resources>
           <MainPath>./index.html</MainPath>
@@ -29,8 +29,8 @@
           <AutoVisible>true</AutoVisible>
         </Lifecycle>
         <UI>
-          <Type>Modeless</Type>
-          <Menu>Batch Text Edit v0.0.3 (save opts)</Menu>
+          <Type>ModalDialog</Type>
+          <Menu>Batch Text Edit v0.4 (work)</Menu>
           <Geometry>
             <Size>
               <Height>300</Height>
