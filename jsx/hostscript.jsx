@@ -1,5 +1,7 @@
+//todo: To get rid of the duplication of code, you should try to use a constructor function
+
 // return code alternative character(s) used while editting
-var RETURN_CODE_ALT = "@/";
+var RETURN_CODE_ALT         = "@/";
 // return code that used in regexp (escape the characters if it needs)
 var RETURN_CODE_ALT_FOR_REX = RETURN_CODE_ALT;
 
@@ -61,10 +63,7 @@ function _checkDoc() {
 
   if (!__isDoc()) {
     errCode = '0xfedcba';
-    errMsg  = 'Error:\n' +
-      'Expected document and selected text frame[s]\n' +
-      'Close this window and try again\n' +
-      'with document and selected text frame[s]';
+    errMsg  = 'Expected document and selected text frame[s]';
     alert(errMsg);
     throw new Error(errCode);
   }
@@ -79,10 +78,7 @@ function _checkTextFrames(tfs) {
       errCode;
   if (!__isTxtFrames(tfs)) {
     errCode = '0xabcdef';
-    errMsg  = 'Error:\n' +
-      'Expected selected text frame[s]\n' +
-      'Close this window and try again\n' +
-      'with a selected text frame[s]';
+    errMsg  = 'Expected selected text frame[s]';
     alert(errMsg);
     throw new Error(errCode);
   }
