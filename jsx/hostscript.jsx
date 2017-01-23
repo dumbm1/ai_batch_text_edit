@@ -1,4 +1,5 @@
 //todo: To get rid of the duplication of code, you should try to use a constructor function
+//todo: needs to mutch best visual separation blocks in the interface window
 
 // return code alternative character(s) used while editting
 var RETURN_CODE_ALT         = "@/";
@@ -55,6 +56,7 @@ function replaceAll(et) {
       rex_return_code, RETURN_CODE_ALT));
   }
   _replaceContents(tfs, et.split("\n"), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
+  app.redraw();
 }
 
 function _checkDoc() {

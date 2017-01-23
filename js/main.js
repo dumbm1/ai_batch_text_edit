@@ -64,9 +64,9 @@
 
     $("#btn_refresh").click(reloadPanel);
 
-    $("#btn_test").click(function() {
+    /*$("#btn_test").click(function() {
       localStorage.clear();
-    });
+    });*/
 
     function Store() {
 
