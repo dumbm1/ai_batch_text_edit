@@ -124,6 +124,8 @@ var themeManager = (function() {
 
     addRule( styleId, ".hostBody", "background-color:" + "#" + darkBgdColor);
 
+    addRule ( styleId, ".textareaContainer", "background-color:" + "#" + bgdColor );
+    addRule ( styleId, ".textareaContainer", "border-color:" + "#" + bgdColor );
   }
 
   function onAppThemeColorChanged(event) {

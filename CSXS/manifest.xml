@@ -39,12 +39,12 @@
               <Width>500</Width>
             </Size>
             <MaxSize>
-              <Height>700</Height>
-              <Width>500</Width>
+              <Height>800</Height>
+              <Width>1000</Width>
             </MaxSize>
             <MinSize>
               <Height>200</Height>
-              <Width>500</Width>
+              <Width>420</Width>
             </MinSize>
           </Geometry>
           <Icons>
