@@ -9,19 +9,24 @@
   </style>
 </head>
 <body class="hostElt">
+
 <div id="content">
-  <textarea class="hostTextarea" id="txt_fld" autofocus spellcheck="false"></textarea>
-  <div id="btn_div">
-    <p>*@/ means a return code</p>
-    <input type="button" class="hostButton" id="btn_replace" value="Replace">
-    <input type="button" class="hostButton" id="btn_refresh" value="Refresh"/>
-    <label>font size:</label>
-    <input type="number" id="nmb_font_size" class="hostTextarea" step="1" max="36" min="6" value="12">
-    <label>close after replace:</label>
-    <input type="checkbox" id="chk_close">
-    <label>save:</label>
-    <input type="checkbox" id="chk_save">
-    <!--<input type="button" class="hostButton" id="btn_test" value="Test">-->
+  <div class="textareaContainer">
+    <textarea class="hostTextarea" id="txt_fld" autofocus spellcheck="false"></textarea>
+  </div>
+  <div class="footer">
+    <div id="btn_div">
+      <p><label>* "@/" means a return code</label><label class="float-right">* "---" means a text frames
+        separator</label></p>
+      <input type="button" class="hostButton" id="btn_replace" value="Replace">
+      <label>font size:</label>
+      <input type="number" id="nmb_font_size" class="hostTextarea" step="1" max="36" min="6" value="12">
+      <label>close after replace:</label>
+      <input type="checkbox" id="chk_close">
+      <label>save:</label>
+      <input type="checkbox" id="chk_save">
+      <input type="button" class="hostButton" id="btn_refresh" value="Refresh"/>
+      <!--<input type="button" class="hostButton" id="btn_test" value="Test">--></div>
   </div>
 </div>
 <script src="js/libs/CSInterface.js"></script>

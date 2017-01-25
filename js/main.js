@@ -20,7 +20,7 @@
 
       store.setFace(storeOpts);
       csInterface.evalScript('getContents()', function(result) {
-        if (result.match('0xabcdef') || result.match('0xfedcba')) csInterface.closeExtension();
+        // if (result.match('0xabcdef') || result.match('0xfedcba')) csInterface.closeExtension();
 
         $("#txt_fld").val(result);
       });

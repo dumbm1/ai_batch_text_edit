@@ -29,7 +29,7 @@ function getContents() {
     conts.push(tfs[i].tf.contents.replace(
       rex_return_code, RETURN_CODE_ALT));
   }
-  return conts.join("\n");
+  return conts.join("\n---\n");
 }
 
 function replaceAll(et) {
@@ -55,7 +55,7 @@ function replaceAll(et) {
     conts.push(tfs[i].tf.contents.replace(
       rex_return_code, RETURN_CODE_ALT));
   }
-  _replaceContents(tfs, et.split("\n"), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
+  _replaceContents(tfs, et.split("\n---\n"), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
   app.redraw();
 }
 
@@ -64,10 +64,12 @@ function _checkDoc() {
       errCode;
 
   if (!__isDoc()) {
-    errCode = '0xfedcba';
-    errMsg  = 'Expected document and selected text frame[s]';
-    alert(errMsg);
-    throw new Error(errCode);
+    // errCode = '0xfedcba';
+    errMsg = 'Expected document and selected text frame[s]\n' +
+      'Select text frames and push button "Refresh"';
+    // alert(errMsg);
+    // throw new Error(errCode);
+    throw new Error(errMsg);
   }
   return true;
   function __isDoc() {
@@ -79,10 +81,12 @@ function _checkTextFrames(tfs) {
   var errMsg,
       errCode;
   if (!__isTxtFrames(tfs)) {
-    errCode = '0xabcdef';
-    errMsg  = 'Expected selected text frame[s]';
-    alert(errMsg);
-    throw new Error(errCode);
+    // errCode = '0xabcdef';
+    errMsg = 'Expected selected text frame[s]\n' +
+      'Select text frames and push button "Refresh"';
+    // alert(errMsg);
+    // throw new Error(errCode);
+    throw new Error(errMsg);
   }
   return true;
   function __isTxtFrames(tfs /*@param {Array} tfs - selected text frames*/) {
