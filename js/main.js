@@ -18,15 +18,12 @@
       storeOpts = store.setStore(defOpts);
     }
 
-    if (csInterface.isWindowVisible()) {
       store.setFace(storeOpts);
-
       csInterface.evalScript('getContents()', function(result) {
         if (result.match('0xabcdef') || result.match('0xfedcba')) csInterface.closeExtension();
 
         $("#txt_fld").val(result);
       });
-    }
 
     $("#nmb_font_size").change(function() {
       $('#txt_fld').css("font-size", $(this).val() + "pt");
@@ -34,7 +31,7 @@
       if ($('#chk_save').is(':checked')) {
         store.setStore(store.getFace());
       }
-    })
+    });
 
     $("#btn_replace").click(function() {
       var et = $("#txt_fld").val();

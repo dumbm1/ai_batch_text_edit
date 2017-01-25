@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest Version="4.0"
                    ExtensionBundleId="com.ai.batchTextEdit_wk"
-                   ExtensionBundleVersion="0.5"
+                   ExtensionBundleVersion="0.6"
                    ExtensionBundleName="batchTextEdit_wk"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ExtensionList>
-    <Extension Id="com.ai.batchTextEdit_wk.dialog" Version="0.5"/>
+    <!--<Extension Id="com.ai.batchTextEdit_wk.dialog" Version="0.6"/>-->
+    <Extension Id="com.ai.batchTextEdit_wk.panel" Version="0.6"/>
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
@@ -19,7 +20,8 @@
     </RequiredRuntimeList>
   </ExecutionEnvironment>
   <DispatchInfoList>
-    <Extension Id="com.ai.batchTextEdit_wk.dialog">
+    <!--<Extension Id="com.ai.batchTextEdit_wk.dialog">-->
+    <Extension Id="com.ai.batchTextEdit_wk.panel">
       <DispatchInfo>
         <Resources>
           <MainPath>./index.html</MainPath>
@@ -29,20 +31,20 @@
           <AutoVisible>true</AutoVisible>
         </Lifecycle>
         <UI>
-          <Type>ModalDialog</Type>
-          <Menu>Batch Text Edit v0.5 (work)</Menu>
+          <Type>Panel</Type>
+          <Menu>Batch Text Edit v0.6 (work)</Menu>
           <Geometry>
             <Size>
               <Height>300</Height>
-              <Width>450</Width>
+              <Width>500</Width>
             </Size>
             <MaxSize>
               <Height>700</Height>
-              <Width>450</Width>
+              <Width>500</Width>
             </MaxSize>
             <MinSize>
               <Height>200</Height>
-              <Width>450</Width>
+              <Width>500</Width>
             </MinSize>
           </Geometry>
           <Icons>

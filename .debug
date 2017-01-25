@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <ExtensionList>
-    <Extension Id="com.ai.batchTextEdit_wk.dialog">
+    <Extension Id="com.ai.batchTextEdit_wk.panel">
         <HostList>
            <!-- Illustrator -->
                        <Host Name="ILST" Port="8088"/>
