@@ -6,6 +6,7 @@
   var csInterface = new CSInterface();
   themeManager.init();
   loadJSX("json2.js");
+  loadJSX("hostscript.jsx");
   init();
 
   function init() {
@@ -18,15 +19,27 @@
       storeOpts = store.setStore(defOpts);
     }
 
-      store.setFace(storeOpts);
-      csInterface.evalScript('getContents()', function(result) {
-        // if (result.match('0xabcdef') || result.match('0xfedcba')) csInterface.closeExtension();
+    store.setFace(storeOpts);
 
-        $("#txt_fld").val(result);
-      });
+
+    var editor = ace.edit("editor");
+    // editor.setTheme("ace/theme/monokai");
+    // editor.getSession().setMode("ace/mode/text");
+    editor.setShowInvisibles(true);
+    editor.setShowPrintMargin(false);
+    editor.setWrapBehavioursEnabled(true);
+    editor.getSession().setUseWrapMode(true);
+
+    editor.$blockScrolling = Infinity;
+
+    csInterface.evalScript('getContents()', function(result) {
+
+      editor.setValue(result, 0);
+    });
 
     $("#nmb_font_size").change(function() {
-      $('#txt_fld').css("font-size", $(this).val() + "pt");
+      $('#editor').css("font-size", $(this).val() + "pt");
+      editor.focus();
 
       if ($('#chk_save').is(':checked')) {
         store.setStore(store.getFace());
@@ -34,12 +47,9 @@
     });
 
     $("#btn_replace").click(function() {
-      var et = $("#txt_fld").val();
+      var et = editor.getValue();
 
       csInterface.evalScript('replaceAll(' + JSON.stringify(et) + ')', function(result) {
-        if ($('#chk_close').is(':checked')) {
-          csInterface.closeExtension();
-        }
       });
     });
 
@@ -52,18 +62,11 @@
       }
     });
 
-    $("#chk_close").change(function() {
-      if ($('#chk_save').is(':checked')) {
-        var opts = store.getFace();
-        store.setStore(opts);
-      }
-    });
-
     $("#btn_refresh").click(reloadPanel);
 
     /*$("#btn_test").click(function() {
-      localStorage.clear();
-    });*/
+     localStorage.clear();
+     });*/
 
     function Store() {
 
@@ -120,7 +123,7 @@
       }
 
       this.setFace = function(opts) {
-        $('#txt_fld').css("font-size", opts.nmb_font_size + "pt");
+        $('#editor').css("font-size", opts.nmb_font_size + "pt");
         $("#nmb_font_size").val(opts.nmb_font_size);
         $("#chk_close").prop('checked', opts.chk_close);
         $("#chk_save").prop('checked', opts.chk_save);

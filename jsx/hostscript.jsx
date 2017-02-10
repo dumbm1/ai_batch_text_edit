@@ -2,7 +2,7 @@
 //todo: needs to mutch best visual separation blocks in the interface window
 
 // return code alternative character(s) used while editting
-var RETURN_CODE_ALT         = "@/";
+var RETURN_CODE_ALT         = "\n";
 // return code that used in regexp (escape the characters if it needs)
 var RETURN_CODE_ALT_FOR_REX = RETURN_CODE_ALT;
 

@@ -6,32 +6,47 @@
   <link id="hostStyle" rel="stylesheet" href="css/styles.css"/>
   <title>ai-batch-text-edit</title>
   <style type="text/css">
+    #editor {
+      box-sizing:     border-box;
+      position:       absolute;
+      top:            0;
+      right:          0;
+      bottom:         0;
+      left:           0;
+      padding:        5px;
+      text-transform: none;
+      width:          100%;
+    }
+    .float-right{
+      margin-left: 20px;
+    }
   </style>
 </head>
 <body class="hostElt">
 
 <div id="content">
   <div class="textareaContainer">
-    <textarea class="hostTextarea" id="txt_fld" autofocus spellcheck="false"></textarea>
+    <!--<textarea class="hostTextarea" id="txt_fld" autofocus spellcheck="false"></textarea>-->
+    <div id="editor"></div>
+
   </div>
   <div class="footer">
     <div id="btn_div">
-      <p><label>* "@/" means a return code</label><label class="float-right">* "---" means a text frames
-        separator</label></p>
+      <p><label>* "¬" means a return code</label><label class="float-right">  * "¬ – – – ¬" separator of the text frames
+      </label></p>
       <input type="button" class="hostButton" id="btn_replace" value="Replace">
       <label>font size:</label>
       <input type="number" id="nmb_font_size" class="hostTextarea" step="1" max="36" min="6" value="12">
-      <label>close after replace:</label>
-      <input type="checkbox" id="chk_close">
       <label>save:</label>
       <input type="checkbox" id="chk_save">
       <input type="button" class="hostButton" id="btn_refresh" value="Refresh"/>
-      <!--<input type="button" class="hostButton" id="btn_test" value="Test">--></div>
+    </div>
   </div>
 </div>
 <script src="js/libs/CSInterface.js"></script>
 <script src="js/libs/jquery-2.0.2.min.js"></script>
 <script src="js/themeManager.js"></script>
+<script src="js/libs/ace/src-noconflict/ace.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

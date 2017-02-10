@@ -3,7 +3,7 @@
     <Extension Id="com.ai.batchTextEdit_wk.panel">
         <HostList>
            <!-- Illustrator -->
-                       <Host Name="ILST" Port="8088"/>
+                       <Host Name="ILST" Port="8002"/>
                         
         </HostList>
     </Extension>
