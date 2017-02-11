@@ -34,15 +34,15 @@
           <Geometry>
             <Size>
               <Height>300</Height>
-              <Width>500</Width>
+              <Width>510</Width>
             </Size>
             <MaxSize>
-              <Height>800</Height>
-              <Width>1000</Width>
+              <Height>900</Height>
+              <Width>1200</Width>
             </MaxSize>
             <MinSize>
               <Height>200</Height>
-              <Width>420</Width>
+              <Width>500</Width>
             </MinSize>
           </Geometry>
           <Icons>

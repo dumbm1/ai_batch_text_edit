@@ -74,6 +74,18 @@ input[type=number] {
   font-size:     1.1em;
 }
 
+input[type=text] {
+  border:        1px solid;
+  border-radius: 2px;
+  height:        19px;
+  width:         50px;
+  margin:        0;
+  padding:       0;
+  text-align:    center;
+  font-weight:   bold;
+  font-size:     1.1em;
+}
+
 input[type=checkbox] {
   opacity:  1;
   display:  inline-block;
@@ -100,6 +112,8 @@ p {
   border-style:   solid;
   background:     #345321;
 }
+
+#txt_fr_sep { width: 70px; }
 
 #txt_fld {
   box-sizing:     border-box;
@@ -139,6 +153,6 @@ p {
 }
 
 #btn_replace {
-  font-weight:  bold;
+  font-weight: bold;
 }
 

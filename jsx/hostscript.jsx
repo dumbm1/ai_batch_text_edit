@@ -6,7 +6,7 @@ var RETURN_CODE_ALT         = "\n";
 // return code that used in regexp (escape the characters if it needs)
 var RETURN_CODE_ALT_FOR_REX = RETURN_CODE_ALT;
 
-function getContents() {
+function getContents(frSep) {
   try {
     _checkDoc();
   } catch (e) {
@@ -29,10 +29,10 @@ function getContents() {
     conts.push(tfs[i].tf.contents.replace(
       rex_return_code, RETURN_CODE_ALT));
   }
-  return conts.join("\n---\n");
+  return conts.join(JSON.parse(frSep));
 }
 
-function replaceAll(et) {
+function replaceAll(et, frSep) {
   try {
     _checkDoc();
   } catch (e) {
@@ -55,7 +55,7 @@ function replaceAll(et) {
     conts.push(tfs[i].tf.contents.replace(
       rex_return_code, RETURN_CODE_ALT));
   }
-  _replaceContents(tfs, et.split("\n---\n"), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
+  _replaceContents(tfs, et.split(JSON.parse(frSep)), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
   app.redraw();
 }
 

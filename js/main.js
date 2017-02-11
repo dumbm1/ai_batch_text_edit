@@ -21,7 +21,6 @@
 
     store.setFace(storeOpts);
 
-
     var editor = ace.edit("editor");
     // editor.setTheme("ace/theme/monokai");
     // editor.getSession().setMode("ace/mode/text");
@@ -29,11 +28,11 @@
     editor.setShowPrintMargin(false);
     editor.setWrapBehavioursEnabled(true);
     editor.getSession().setUseWrapMode(true);
-
     editor.$blockScrolling = Infinity;
 
-    csInterface.evalScript('getContents()', function(result) {
+    var frSep = $('#txt_fr_sep').val();
 
+    csInterface.evalScript('getContents(' + frSep + ')', function(result) {
       editor.setValue(result, 0);
     });
 
@@ -47,9 +46,10 @@
     });
 
     $("#btn_replace").click(function() {
-      var et = editor.getValue();
+      var et    = editor.getValue();
+      var frSep = $('#txt_fr_sep').val();
 
-      csInterface.evalScript('replaceAll(' + JSON.stringify(et) + ')', function(result) {
+      csInterface.evalScript('replaceAll("' + JSON.stringify(et) + "', '" + JSON.stringify(frSep) + '")', function(result) {
       });
     });
 
@@ -75,7 +75,8 @@
           txt_font_size: 12,
           nmb_font_size: 12,
           chk_close:     false,
-          chk_save:      false
+          chk_save:      false,
+          txt_fr_sep:    "\n------\n"
         }
         return opts;
       }
@@ -109,8 +110,9 @@
           txt_font_size: $("#nmb_font_size").val(),
           nmb_font_size: $("#nmb_font_size").val(),
           chk_close:     $("#chk_close").is(':checked'),
-          chk_save:      $("#chk_save").is(':checked')
-        }
+          chk_save:      $("#chk_save").is(':checked'),
+          txt_fr_sep:    $('#txt_fr_sep').val()
+      }
         return opts;
       }
 
@@ -127,6 +129,7 @@
         $("#nmb_font_size").val(opts.nmb_font_size);
         $("#chk_close").prop('checked', opts.chk_close);
         $("#chk_save").prop('checked', opts.chk_save);
+        $('#txt_fr_sep').val(opts.txt_fr_sep);
       }
     }
   }
