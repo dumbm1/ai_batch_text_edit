@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest Version="4.0"
                    ExtensionBundleId="com.ai.batchTextEdit_wk"
-                   ExtensionBundleVersion="0.7.0"
+                   ExtensionBundleVersion="0.7.1"
                    ExtensionBundleName="batchTextEdit_wk"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ExtensionList>
-    <Extension Id="com.ai.batchTextEdit_wk.panel" Version="0.7.0"/>
+    <Extension Id="com.ai.batchTextEdit_wk.panel" Version="0.7.1"/>
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
@@ -30,7 +30,7 @@
         </Lifecycle>
         <UI>
           <Type>Panel</Type>
-          <Menu>Batch Text Edit v0.7.0 (work)</Menu>
+          <Menu>Batch Text Edit v0.7.1 (work)</Menu>
           <Geometry>
             <Size>
               <Height>300</Height>
