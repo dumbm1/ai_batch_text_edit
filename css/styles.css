@@ -38,28 +38,8 @@ by the settings of the CC application
 .hostElt {
 }
 
-.hostButton {
-  border:         1px solid;
-  border-radius:  2px;
-  height:         20px;
-  vertical-align: bottom;
-  font-family:    inherit;
-  color:          inherit;
-  font-size:      inherit;
-}
-
 label {
   margin-bottom: 5px;
-}
-
-.float-right {
-  float:        right;
-  margin-right: 5px;
-}
-
-.float-left {
-  float:       left;
-  margin-left: 5px;
 }
 
 input[type=number] {
@@ -93,8 +73,30 @@ input[type=checkbox] {
   margin:   3px 0 0 -1px;
 }
 
-p {
-  margin-bottom: 5px;
+.hostButton {
+  border:         1px solid;
+  border-radius:  2px;
+  height:         20px;
+  vertical-align: bottom;
+  font-family:    inherit;
+  color:          inherit;
+  font-size:      inherit;
+  width:          165px
+}
+
+.float-right {
+  float: right;
+  /*margin-right: 5px;*/
+  /*margin-left: 20px;*/
+}
+
+.overhide {
+  overflow: hidden;
+}
+
+.float-left {
+  float:       left;
+  margin-left: 5px;
 }
 
 .textareaContainer {
@@ -106,14 +108,30 @@ p {
   left:           0;
   padding:        5px;
   text-transform: none;
-  margin-bottom:  45px;
+  margin-bottom:  80px;
   width:          100%;
   border-width:   5px;
   border-style:   solid;
   background:     #345321;
 }
 
-#txt_fr_sep { width: 70px; }
+.div-inline-block {
+  display: inline-block;
+}
+
+.footer {
+  box-sizing: border-box;
+  position:   absolute;
+  right:      0;
+  bottom:     0;
+  margin:     0;
+  padding:    0;
+  width:      100%;
+}
+
+#txt_fr_sep {
+  width: 130px;
+}
 
 #txt_fld {
   box-sizing:     border-box;
@@ -127,17 +145,7 @@ p {
   width:          100%;
 }
 
-.footer {
-  box-sizing: border-box;
-  position:   absolute;
-  right:      0;
-  bottom:     0;
-  margin:     0;
-  padding:    0;
-  width:      100%;
-}
-
-#btn_div {
+#btn_div, #footer_row_1, #footer_row_3 {
   position:      absolute;
   bottom:        5px;
   margin-left:   5px;
@@ -145,14 +153,54 @@ p {
   margin:        0;
   padding:       0;
   resize:        none;
-  height:        45px;
+  height:        15px;
   font-size:     1.1em;
   border:        none;
   margin-left:   5px;
   margin-bottom: 5px;
+  width:         340px;
+}
+
+#footer_row_1 {
+  bottom: 60px;
+}
+
+#btn_div {
+  bottom: 35px;
 }
 
 #btn_replace {
   font-weight: bold;
 }
 
+#letter_font_size {
+  display:       inline-block;
+  box-sizing:    border-box;
+  padding-left:  2px;
+  font-weight:   bold;
+  font-size:     1.6em;
+  text-align:    right;
+  padding-right: 2px;
+  border-bottom: 1px solid;
+  margin-bottom: 11px;
+}
+
+#lbl_fr_sep {
+  display: inline-block;
+}
+
+#editor {
+  box-sizing:     border-box;
+  position:       absolute;
+  top:            0;
+  right:          0;
+  bottom:         0;
+  left:           0;
+  padding:        5px;
+  text-transform: none;
+  width:          100%;
+}
+
+#div_chk_save {
+  margin-right: 15px;
+}

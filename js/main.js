@@ -24,15 +24,17 @@
     var editor = ace.edit("editor");
     // editor.setTheme("ace/theme/monokai");
     // editor.getSession().setMode("ace/mode/text");
-    editor.setShowInvisibles(true);
+    if ($('#chk_show_hidden').is(':checked')) {
+      editor.setShowInvisibles(true);
+    } else {
+      editor.setShowInvisibles(false);
+    }
     editor.setShowPrintMargin(false);
     editor.setWrapBehavioursEnabled(true);
     editor.getSession().setUseWrapMode(true);
     editor.$blockScrolling = Infinity;
 
-    var frSep = $('#txt_fr_sep').val();
-
-    csInterface.evalScript('getContents(' + frSep + ')', function(result) {
+    csInterface.evalScript('getContents(' + JSON.stringify($('#txt_fr_sep').val()) + ')', function(result) {
       editor.setValue(result, 0);
     });
 
@@ -49,9 +51,18 @@
       var et    = editor.getValue();
       var frSep = $('#txt_fr_sep').val();
 
-      csInterface.evalScript('replaceAll("' + JSON.stringify(et) + "', '" + JSON.stringify(frSep) + '")', function(result) {
+      csInterface.evalScript('replaceAll(' + JSON.stringify(et) + ', ' + JSON.stringify(frSep) + ')', function(result) {
       });
     });
+
+    $('#txt_fr_sep').keyup(function() {
+      if ($('#chk_save').is(':checked')) {
+        store.setStore(store.getFace());
+      }
+      csInterface.evalScript('getContents(' + JSON.stringify($('#txt_fr_sep').val()) + ')', function(result) {
+        editor.setValue(result, 0);
+      });
+    })
 
     $("#chk_save").change(function() {
       if ($(this).is(':checked')) {
@@ -59,6 +70,17 @@
         store.setStore(opts);
       } else {
         store.setStore(defOpts);
+      }
+    });
+
+    $("#chk_show_hidden").change(function() {
+      if ($('#chk_save').is(':checked')) {
+        store.setStore(store.getFace());
+      }
+      if ($(this).is(':checked')) {
+        editor.setShowInvisibles(true);
+      } else {
+        editor.setShowInvisibles(false);
       }
     });
 
@@ -72,11 +94,11 @@
 
       this.getDef = function() {
         var opts = {
-          txt_font_size: 12,
-          nmb_font_size: 12,
-          chk_close:     false,
-          chk_save:      false,
-          txt_fr_sep:    "\n------\n"
+          txt_font_size:   12,
+          nmb_font_size:   12,
+          chk_show_hidden: false,
+          chk_save:        false,
+          txt_fr_sep:      "---"
         }
         return opts;
       }
@@ -97,22 +119,22 @@
         } else if (storeOpts.chk_save == 'false') {
           storeOpts.chk_save = false;
         }
-        if (storeOpts.chk_close == 'true') {
-          storeOpts.chk_close = true;
-        } else if (storeOpts.chk_close == 'false') {
-          storeOpts.chk_close = false;
+        if (storeOpts.chk_show_hidden == 'true') {
+          storeOpts.chk_show_hidden = true;
+        } else if (storeOpts.chk_show_hidden == 'false') {
+          storeOpts.chk_show_hidden = false;
         }
         return storeOpts;
       }
 
       this.getFace = function() {
         var opts = {
-          txt_font_size: $("#nmb_font_size").val(),
-          nmb_font_size: $("#nmb_font_size").val(),
-          chk_close:     $("#chk_close").is(':checked'),
-          chk_save:      $("#chk_save").is(':checked'),
-          txt_fr_sep:    $('#txt_fr_sep').val()
-      }
+          txt_font_size:   $("#nmb_font_size").val(),
+          nmb_font_size:   $("#nmb_font_size").val(),
+          chk_show_hidden: $("#chk_show_hidden").is(':checked'),
+          chk_save:        $("#chk_save").is(':checked'),
+          txt_fr_sep:      $('#txt_fr_sep').val(),
+        }
         return opts;
       }
 
@@ -127,7 +149,7 @@
       this.setFace = function(opts) {
         $('#editor').css("font-size", opts.nmb_font_size + "pt");
         $("#nmb_font_size").val(opts.nmb_font_size);
-        $("#chk_close").prop('checked', opts.chk_close);
+        $("#chk_show_hidden").prop('checked', opts.chk_show_hidden);
         $("#chk_save").prop('checked', opts.chk_save);
         $('#txt_fr_sep').val(opts.txt_fr_sep);
       }

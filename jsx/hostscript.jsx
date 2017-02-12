@@ -29,7 +29,7 @@ function getContents(frSep) {
     conts.push(tfs[i].tf.contents.replace(
       rex_return_code, RETURN_CODE_ALT));
   }
-  return conts.join(JSON.parse(frSep));
+  return conts.join('\n' + frSep + '\n');
 }
 
 function replaceAll(et, frSep) {
@@ -55,7 +55,7 @@ function replaceAll(et, frSep) {
     conts.push(tfs[i].tf.contents.replace(
       rex_return_code, RETURN_CODE_ALT));
   }
-  _replaceContents(tfs, et.split(JSON.parse(frSep)), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
+  _replaceContents(tfs, et.split('\n' + frSep + '\n'), new RegExp(RETURN_CODE_ALT_FOR_REX, "g"));
   app.redraw();
 }
 

@@ -6,20 +6,7 @@
   <link id="hostStyle" rel="stylesheet" href="css/styles.css"/>
   <title>ai-batch-text-edit</title>
   <style type="text/css">
-    #editor {
-      box-sizing:     border-box;
-      position:       absolute;
-      top:            0;
-      right:          0;
-      bottom:         0;
-      left:           0;
-      padding:        5px;
-      text-transform: none;
-      width:          100%;
-    }
-    .float-right{
-      margin-left: 20px;
-    }
+
 
   </style>
 </head>
@@ -27,22 +14,30 @@
 
 <div id="content">
   <div class="textareaContainer">
-    <!--<textarea class="hostTextarea" id="txt_fld" autofocus spellcheck="false"></textarea>-->
     <div id="editor"></div>
 
   </div>
   <div class="footer">
+    <div id="footer_row_1">
+      <label>* "¬" means a return code</label>
+      <div id="lbl_fr_sep" class="float-right">
+        <div class="div-inline-block" id="div_chk_save"><label>Save</label>
+          <input type="checkbox" id="chk_save"></div>
+        <label>Show hidden characters</label>
+        <input type="checkbox" id="chk_show_hidden">
+      </div>
+    </div>
     <div id="btn_div">
-      <p><label>* "¬" means a return code</label><label class="float-right">  * "¬ – – – ¬" separator of the text frames
-      </label></p>
-      <input type="button" class="hostButton" id="btn_replace" value="Replace">
-      <label>font size:</label>
+
+      <label>Font size:</label>
       <input type="number" id="nmb_font_size" class="hostTextarea" step="1" max="36" min="6" value="12">
-      <label>frames separator:</label>
-      <input type="text" id="txt_fr_sep" class="hostTextarea" value="\n------\n">
-      <label>save:</label>
-      <input type="checkbox" id="chk_save">
-      <input type="button" class="hostButton" id="btn_refresh" value="Refresh"/>
+      <div class="div-inline-block float-right"><label class="overhide">Frames separator:</label>
+        <input type="text" id="txt_fr_sep" class="hostTextarea"></div>
+
+    </div>
+    <div id="footer_row_3">
+      <input type="button" class="hostButton" id="btn_replace" value="OK">
+      <input type="button" class="hostButton float-right" id="btn_refresh" value="Update"/>
     </div>
   </div>
 </div>
