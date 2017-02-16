@@ -1,4 +1,4 @@
-Batch Text Edit v0.7.1
+Batch Text Edit v0.7.2
 ===
 
 ###HTML/CSS/JS Extension Panel for Adobe® Illustrator®

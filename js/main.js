@@ -26,6 +26,8 @@
     // editor.getSession().setMode("ace/mode/text");
     editor.renderer.setOption('showLineNumbers', false);
     editor.renderer.setShowGutter(false);
+    editor.renderer.setPadding(2);
+
     if ($('#chk_show_hidden').is(':checked')) {
       editor.setShowInvisibles(true);
     } else {
@@ -33,7 +35,9 @@
     }
     editor.setShowPrintMargin(false);
     editor.setWrapBehavioursEnabled(true);
+
     editor.getSession().setUseWrapMode(true);
+    editor.getSession().setTabSize(0);
 
     editor.$blockScrolling = Infinity;
 
