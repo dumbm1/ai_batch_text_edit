@@ -7,7 +7,6 @@
   <title>ai-batch-text-edit</title>
   <style type="text/css">
 
-
   </style>
 </head>
 <body class="hostElt">
@@ -21,9 +20,9 @@
     <div id="footer_row_1">
       <label>* "¬" means a return code</label>
       <div id="lbl_fr_sep" class="float-right">
-        <div class="div-inline-block" id="div_chk_save"><label>Save</label>
+        <div class="div-inline-block" id="div_chk_save"><label for="chk_save">Save</label>
           <input type="checkbox" id="chk_save"></div>
-        <label>Show hidden characters</label>
+        <label for="chk_show_hidden">Show hidden characters</label>
         <input type="checkbox" id="chk_show_hidden">
       </div>
     </div>
@@ -37,7 +36,9 @@
     </div>
     <div id="footer_row_3">
       <input type="button" class="hostButton" id="btn_replace" value="OK">
-      <input type="button" class="hostButton float-right" id="btn_refresh" value="Update"/>
+      <input type="button" class="hostButton" id="btn_refresh" value="Update"/>
+      <label for="chk_confirm_update">Confirm unpdate</label>
+      <input type="checkbox" id="chk_confirm_update" checked>
     </div>
   </div>
 </div>
