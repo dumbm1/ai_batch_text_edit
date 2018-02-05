@@ -9,8 +9,15 @@
   loadJSX('hostscript.jsx');
   init();
 
+  (function () {
+    $("#form_batch_text_edit").sisyphus({
+                                          /*excludeFields: $("#fld_return"),
+                                           timeout: 10*/
+                                        })
+  }());
+
   function init() {
-    var store = new Store();
+/*    var store = new Store();
     var defOpts = store.getDef();
 
     var storeOpts = store.getStore(defOpts);
@@ -19,7 +26,7 @@
       storeOpts = store.setStore(defOpts);
     }
 
-    store.setFace(storeOpts);
+    store.setFace(storeOpts);*/
 
     var editor = ace.edit('editor');
     // editor.setTheme("ace/theme/monokai");
@@ -47,14 +54,18 @@
       editor.focus();
     });
 
+
+
     $('#nmb_font_size').change(function () {
       $('#editor').css('font-size', $(this).val() + 'pt');
       editor.focus();
 
-      if ($('#chk_save').is(':checked')) {
+      /*if ($('#chk_save').is(':checked')) {
         store.setStore(store.getFace());
-      }
+      }*/
     });
+
+
 
     $('#btn_replace').click(function () {
       var et = editor.getValue();
@@ -69,26 +80,26 @@
       csInterface.evalScript('getContents(' + JSON.stringify($('#txt_fr_sep').val()) + ')', function (result) {
         editor.setValue(result, 0);
 
-        if ($('#chk_save').is(':checked')) {
+        /*if ($('#chk_save').is(':checked')) {
           store.setStore(store.getFace());
-        }
+        }*/
         editor.clearSelection();
       });
     });
 
-    $('#chk_save').change(function () {
+ /*   $('#chk_save').change(function () {
       if ($(this).is(':checked')) {
         var opts = store.getFace();
         store.setStore(opts);
       } else {
         store.setStore(defOpts);
       }
-    });
+    });*/
 
     $('#chk_show_hidden').change(function () {
-      if ($('#chk_save').is(':checked')) {
+     /* if ($('#chk_save').is(':checked')) {
         store.setStore(store.getFace());
-      }
+      }*/
       if ($(this).is(':checked')) {
         editor.setShowInvisibles(true);
       } else {
@@ -110,7 +121,7 @@
      localStorage.clear();
      });*/
 
-    function Store() {
+   /* function Store() {
 
       this.getDef = function () {
         var opts = {
@@ -131,9 +142,9 @@
           }
           storeOpts[key] = localStorage.getItem(key);
         }
-        /**
+        /!**
          * !!! in the localStorage all values have a type String
-         * */
+         * *!/
         if (storeOpts.chk_save == 'true') {
           storeOpts.chk_save = true;
         } else if (storeOpts.chk_save == 'false') {
@@ -173,7 +184,7 @@
         $('#chk_save').prop('checked', opts.chk_save);
         $('#txt_fr_sep').val(opts.txt_fr_sep);
       };
-    }
+    }*/
   }
 
   function loadJSX(fileName) {
