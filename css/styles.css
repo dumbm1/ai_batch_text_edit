@@ -82,7 +82,7 @@ input[type=checkbox] {
  font-family    : inherit;
  color          : inherit;
  font-size      : inherit;
- width          : 100px
+ width          : 75px;
  }
 
 .float-right {
